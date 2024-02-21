@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <form method="POST">
+        <input type="text" name="task" placeholder="Enter task">
+        <input type="date" name="due_date"> <!-- Date input field -->
+        <button type="submit">Add Task</button>
+    </form>    
+    <ul>
+        {% for index, task in enumerate(tasks) %}
+            <li>{{ loop.index }}. {{ task['task'] }} - Due: {{ task['due_date'] }}
+                {% if task['completed'] %}
+                    (Completed) | <a href="{{ url_for('complete_task', index=index) }}">Undo</a>
+                {% else %}
+                    <a href="{{ url_for('complete_task', index=index) }}">Mark as Complete</a>
+                {% endif %}
+                | <a href="{{ url_for('delete_task', index=index) }}">Delete</a>
+                {% if not task['reminder_set'] %}
+                    | <a href="{{ url_for('set_reminder', index=index) }}">Set Reminder</a>
+                {% else %}
+                    | Reminder set for: {{ task['reminder_time'] }} | <a href="{{ url_for('undo_reminder', index=index) }}">Undo Reminder</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

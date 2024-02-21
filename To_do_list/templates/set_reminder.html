@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Reminder</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles1.css') }}">
+</head>
+<body>
+    <h1>Set Reminder</h1>
+    <form method="POST">
+        <label for="reminder_date">Reminder Date:</label>
+        <input type="date" id="reminder_date" name="reminder_date"><br><br>
+        <label for="reminder_time">Reminder Time:</label>
+        <input type="time" id="reminder_time" name="reminder_time"><br><br>
+        <button type="submit">Set Reminder</button>
+    </form>
+</body>
+</html>
